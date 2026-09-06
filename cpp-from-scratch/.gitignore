@@ -1,0 +1,54 @@
+# Build outputs
+build/
+out/
+bin/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# CUDA
+*.ptx
+*.cubin
+*.fatbin
+*.nvvp
+*.ncu-rep
+*.nsys-rep
+
+# Editor / IDE
+.vscode/
+.vs/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.cache
+
+# Package/dependency dirs (if any external libs get vendored)
+vendor/
+_deps/
+
+# Compiled Python (if any scripts/benchmarks use it)
+__pycache__/
+*.pyc

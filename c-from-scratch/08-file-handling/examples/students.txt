@@ -1,0 +1,2 @@
+1|Rohit sharma|45.00
+2|Virat kholi|100.00

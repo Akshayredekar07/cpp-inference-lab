@@ -1,0 +1,4 @@
+This is new content
+Previous data is lost
+This is appended content
+Previous data is preserved

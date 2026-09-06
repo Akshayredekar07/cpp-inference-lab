@@ -1,0 +1,3 @@
+Line 1: File handling in C
+Line 2: fopen and fclose functions
+Line 3: Example completed
