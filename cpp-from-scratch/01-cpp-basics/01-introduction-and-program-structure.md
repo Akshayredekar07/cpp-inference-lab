@@ -101,21 +101,6 @@ int main(void) {
 }
 ```
 
-### **Key C vs C++ differences you'll hit immediately**
-
-| Area | C | C++ |
-|------|---|-----|
-| Implicit `void*` | `T* p = malloc(...)` works | `T* p = malloc(...)` ERROR — must cast or use `new` |
-| Struct tags in names | Sometimes need `struct Foo f;` | `Foo f;` is enough (the tag is also a type name) |
-| `const` linkage | C uses `extern` defaults | C++ uses internal linkage for `const` at namespace scope by default |
-| `auto` | Storage class (rare) | Type inference (the default since C++11) |
-| New keywords | — | `class`, `template`, `typename`, `constexpr`, `nullptr`, `decltype`, `noexcept`, `static_cast`, … |
-| Function prototypes | Optional (K&R style allowed) | Required — empty `()` means "no args" in C++ (not "unknown args") |
-| Trailing comma in enum | Allowed | Allowed |
-| Compound literals `(Type){...}` | Allowed | NOT allowed (use braced init) |
-| Designated initializers `.x=1` | C99+ | C++20 (limited) |
-| VLAs | C99 optional | Optional in C++14, removed in C++17 (except as a GCC extension) |
-
 ### **Practical: a C file that fails to compile as C++**
 
 ```c
