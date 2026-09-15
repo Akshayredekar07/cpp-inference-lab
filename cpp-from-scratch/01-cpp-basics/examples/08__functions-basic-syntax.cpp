@@ -9,14 +9,36 @@ void greet() {
     std::cout << "Hello, C++\n";
 }
 
+void print_number(){
+    std::cout << "Eleven (11)\n";
+}
+
+
 // ──── function with parameters 
 void greetUser(const std::string& name) {
     std::cout << "Hello, " << name << "\n";
 }
 
+
+// void upperLetters(const std::string& name) {
+//     for (char c : name)
+//         std::cout << static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
+// }   
+
+// std::string upperLetters(const std::string& name) {
+//     std::string result = name;
+//     std::transform(result.begin(), result.end(), result.begin(),
+//                    [](unsigned char c) { return std::toupper(c); });
+//     return result;
+// }   
+
 // ──── function with return value 
 int add(int a, int b) {
     return a + b;
+}
+
+int add_and_subtract( int p, int q, int r){
+    return p + q - r;
 }
 
 // ──── function declaration 
@@ -134,7 +156,7 @@ int main() {
     std::cout << "value1=" << value1 << "\n";
 
 
-    // ──── pass by reference ──────────────────────────────────
+    // ──── pass by reference 
     std::cout << "\n──── pass by reference ────\n";
 
     int value2 = 10;
@@ -145,7 +167,7 @@ int main() {
     std::cout << "value2=" << value2 << "\n";
 
 
-    // ──── const reference ────────────────────────────────────
+    // ──── const reference 
     std::cout << "\n──── const reference ────\n";
 
     std::string name = "Akshay";
@@ -153,26 +175,26 @@ int main() {
     printName(name);
 
 
-    // ──── function overloading ───────────────────────────────
+    // ──── function overloading 
     std::cout << "\n──── function overloading ────\n";
 
     std::cout << "square(5) = " << square(5) << "\n";
     std::cout << "square(2.5) = " << square(2.5) << "\n";
 
 
-    // ──── recursion ──────────────────────────────────────────
+    // ──── recursion 
     std::cout << "\n──── recursion ────\n";
 
     std::cout << "factorial(5) = " << factorial(5) << "\n";
 
 
-    // ──── inline function ────────────────────────────────────
+    // ──── inline function 
     std::cout << "\n──── inline function ────\n";
 
     std::cout << "cube(3) = " << cube(3) << "\n";
 
 
-    // ──── function composition ───────────────────────────────
+    // ──── function composition 
     std::cout << "\n──── function composition ────\n";
 
     int x = add(5, 5);

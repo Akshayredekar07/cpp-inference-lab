@@ -1,4 +1,4 @@
-// bad_as_cpp.c
+// 02__bad-c-file-as-cpp-source.c
 #include <stdlib.h>
 int main(void) {
     int* p = ((int*)malloc(4 * sizeof(int)));   // C: implicit void* -> int* OK

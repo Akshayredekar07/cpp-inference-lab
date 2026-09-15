@@ -1,13 +1,13 @@
 #include <iostream>
 
-// ──── statements ─────────────────────────────────────────────
+// ──── statements 
 // A statement performs an action and usually ends with ;
 // Examples:
 //     int x = 10;        declaration statement
 //     x = x + 1;         expression statement
 //     return 0;          return statement
 
-// ──── expressions ────────────────────────────────────────────
+// ──── expressions 
 // An expression produces a value.
 // Examples:
 //     10
@@ -16,20 +16,20 @@
 //     square(5)
 //     x * y
 
-// ──── blocks ─────────────────────────────────────────────────
+// ──── blocks 
 // A block is a sequence of statements inside { }.
 // Blocks introduce scope.
 
 int main() {
 
-    // ──── statements ─────────────────────────────────────────
+    // ──── statements 
     std::cout << "──── statements ────\n";
 
     int x = 10;            // declaration statement
     x = x + 1;             // expression statement
     std::cout << x << "\n";
 
-    // ──── expressions ────────────────────────────────────────
+    // ──── expressions 
     std::cout << "\n──── expressions ────\n";
 
     int a = 5;
@@ -39,7 +39,7 @@ int main() {
     std::cout << (a + b) << "\n";     // operator expression
     std::cout << 100 << "\n";         // literal expression
 
-    // ──── blocks ─────────────────────────────────────────────
+    // ──── blocks 
     std::cout << "\n──── blocks ────\n";
 
     {
@@ -56,7 +56,7 @@ int main() {
     // std::cout << y;
     // error: 'y' was not declared in this scope
 
-    // ──── block scope ────────────────────────────────────────
+    // ──── block scope 
     std::cout << "\n──── block scope ────\n";
 
     int value = 100;
@@ -68,7 +68,7 @@ int main() {
 
     std::cout << value << "\n";
 
-    // ──── combined example ───────────────────────────────────
+    // ──── combined example 
     std::cout << "\n──── combined ────\n";
 
     int number = 10;           // declaration statement
