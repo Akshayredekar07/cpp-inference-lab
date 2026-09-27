@@ -41,7 +41,7 @@ public:                                // public for now — encapsulation comes
     }
 };
 
-void demo_classesAndObjects() {
+void runClassesAndObjects() {
     std::cout << "──── 1. classes and objects ────\n";
 
     Student alice;                     // default-constructed
@@ -91,7 +91,7 @@ public:
     }
 };
 
-void demo_accessSpecifiers() {
+void runAccessSpecifiers() {
     std::cout << "──── 2. access specifiers ────\n";
 
     Account a("Karan", "AC-001", 100.0);
@@ -125,7 +125,7 @@ public:
     int getRoll() const { return rollNumber; }
 };
 
-void demo_encapsulation() {
+void runEncapsulation() {
     std::cout << "──── 3. encapsulation ────\n";
 
     StudentEncapsulated s;
@@ -160,7 +160,7 @@ public:
     int current() const { return n; }
 };
 
-void demo_thisPointer() {
+void runThisPointer() {
     std::cout << "──── 4. this pointer & chaining ────\n";
 
     Counter c;
@@ -189,7 +189,7 @@ public:
     }
 };
 
-void demo_constructors() {
+void runConstructors() {
     std::cout << "──── 5. constructors ────\n";
 
     Box a;                             // default
@@ -222,7 +222,7 @@ void printStudent(Student6 s) {
     std::cout << "  inside printStudent: " << s.getName() << "\n";
 }
 
-void demo_copyConstructor() {
+void runCopyConstructor() {
     std::cout << "──── 6. copy constructor ────\n";
 
     Student6 alice("Alice");
@@ -251,7 +251,7 @@ public:
     }
 };
 
-void demo_destructor() {
+void runDestructor() {
     std::cout << "──── 7. destructor / RAII ────\n";
 
     File a("a.txt");
@@ -283,7 +283,7 @@ public:
 };
 int Widget::alive = 0;                 // definition — exactly once
 
-void demo_staticMembers() {
+void runStaticMembers() {
     std::cout << "──── 8. static members ────\n";
 
     std::cout << "  initial count  = " << Widget::count() << "\n";
@@ -316,7 +316,7 @@ public:
     }
 };
 
-void demo_constMemberFunctions() {
+void runConstMemberFunctions() {
     std::cout << "──── 9. const member functions ────\n";
 
     Thermostat t;
@@ -353,7 +353,7 @@ public:
     }
 };
 
-void demo_composition() {
+void runComposition() {
     std::cout << "──── 10. composition ────\n";
 
     Car c("Swift");
@@ -380,7 +380,7 @@ public:
     void speak() const override { std::cout << "  Meow!\n"; }
 };
 
-void demo_polymorphism() {
+void runPolymorphism() {
     std::cout << "──── 11. polymorphism (preview) ────\n";
 
     Dog d;
@@ -441,7 +441,7 @@ public:
     std::size_t getSize() const { return data.size(); }
 };
 
-void demo_ruleOfZero() {
+void runRuleOfZero() {
     std::cout << "──── 12. rule of three vs zero ────\n";
 
     BufferOld a(64);
@@ -460,62 +460,62 @@ int main() {
 
     // ──── 1. classes and objects ────
     std::cout << "════ 1. classes and objects ════\n";
-    demo_classesAndObjects();
+    runClassesAndObjects();
 
 
     // ──── 2. access specifiers ────
     std::cout << "\n════ 2. access specifiers ════\n";
-    demo_accessSpecifiers();
+    runAccessSpecifiers();
 
 
     // ──── 3. encapsulation ────
     std::cout << "\n════ 3. encapsulation ════\n";
-    demo_encapsulation();
+    runEncapsulation();
 
 
     // ──── 4. this pointer ────
     std::cout << "\n════ 4. this pointer & chaining ════\n";
-    demo_thisPointer();
+    runThisPointer();
 
 
     // ──── 5. constructors ────
     std::cout << "\n════ 5. constructors ════\n";
-    demo_constructors();
+    runConstructors();
 
 
     // ──── 6. copy constructor ────
     std::cout << "\n════ 6. copy constructor ════\n";
-    demo_copyConstructor();
+    runCopyConstructor();
 
 
     // ──── 7. destructor ────
     std::cout << "\n════ 7. destructor / RAII ════\n";
-    demo_destructor();
+    runDestructor();
 
 
     // ──── 8. static members ────
     std::cout << "\n════ 8. static members ════\n";
-    demo_staticMembers();
+    runStaticMembers();
 
 
     // ──── 9. const member functions ────
     std::cout << "\n════ 9. const member functions ════\n";
-    demo_constMemberFunctions();
+    runConstMemberFunctions();
 
 
     // ──── 10. composition ────
     std::cout << "\n════ 10. composition (has-a) ════\n";
-    demo_composition();
+    runComposition();
 
 
     // ──── 11. polymorphism (preview) ────
     std::cout << "\n════ 11. polymorphism (preview) ════\n";
-    demo_polymorphism();
+    runPolymorphism();
 
 
     // ──── 12. rule of three vs zero ────
     std::cout << "\n════ 12. rule of three vs zero ════\n";
-    demo_ruleOfZero();
+    runRuleOfZero();
 
 
     std::cout << "\n════ done ════\n";
