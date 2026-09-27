@@ -25,7 +25,7 @@
 // ──── 1. declaration and initialization ────
 // C arrays need a compile-time size. Lists shorter than the size
 // are zero-padded; lists longer are a compile error.
-void demo_declaration() {
+void runDeclaration() {
     std::cout << "──── 1. declaration and initialization ────\n";
 
     int uninit[5];                     // garbage values
@@ -43,7 +43,7 @@ void demo_declaration() {
 // ──── 2. indexing and bounds ────
 // operator[] does NOT check bounds. Reading or writing past the end
 // is undefined behavior. std::array::at() does check.
-void demo_indexing() {
+void runIndexing() {
     std::cout << "──── 2. indexing and bounds ────\n";
 
     int a[5] = {10, 20, 30, 40, 50};
@@ -65,7 +65,7 @@ void demo_indexing() {
 // ──── 3. size: sizeof, std::size, std::ssize ────
 // Plain arrays do not have a .size() — you compute it from sizeof
 // or use std::size / std::ssize (C++17 / C++20).
-void demo_size() {
+void runSize() {
     std::cout << "──── 3. size helpers ────\n";
 
     int a[7] = {1, 2, 3, 4, 5, 6, 7};
@@ -73,14 +73,14 @@ void demo_size() {
     std::cout << "  sizeof(a)/sizeof(a[0]) = "
               << sizeof(a) / sizeof(a[0]) << " elements\n";
     std::cout << "  std::size(a)           = " << std::size(a) << "\n";
-    std::cout << "  std::ssize(a)          = " << std::ssize(a)
-              << " (signed)\n";
+    std::cout << "  ssize (signed)         = "
+              << static_cast<std::ptrdiff_t>(sizeof(a) / sizeof(a[0])) << "\n";
 }
 
 
 // ──── 4. iteration ────
 // Three styles for walking an array.
-void demo_iteration() {
+void runIteration() {
     std::cout << "──── 4. iteration ────\n";
 
     int a[5] = {1, 2, 3, 4, 5};
@@ -114,7 +114,7 @@ void demo_iteration() {
 
 // ──── 5. multidimensional arrays ────
 // Stored row-major: all rows contiguous in memory.
-void demo_multidim() {
+void runMultidim() {
     std::cout << "──── 5. multidimensional arrays ────\n";
 
     int m[3][4] = {
@@ -142,14 +142,14 @@ void demo_multidim() {
 // ──── 6. array-to-pointer decay ────
 // In most expressions the array name becomes a pointer to its first
 // element. sizeof, &, and references to arrays are the exceptions.
-void demo_decay(const int* p, std::size_t n) {   // helper for demo 7
+void runDecay(const int* p, std::size_t n) {   // helper for the array-decay section
     for (std::size_t i = 0; i < n; ++i) {
         std::cout << p[i] << " ";
     }
     std::cout << "\n";
 }
 
-void demo_array_decay() {
+void runArrayDecay() {
     std::cout << "──── 6. array-to-pointer decay ────\n";
 
     int a[5] = {10, 20, 30, 40, 50};
@@ -168,7 +168,7 @@ void demo_array_decay() {
     int (&ra)[5] = a;                 // reference to the array — no decay
     std::cout << "  ra[4]    = " << ra[4] << " via reference\n";
 
-    demo_decay(a, std::size(a));      // a decays to int* when passed
+    runDecay(a, std::size(a));      // a decays to int* when passed
 }
 
 
@@ -195,7 +195,7 @@ void print_ref_any(const int (&arr)[N]) {
     std::cout << " (N=" << N << ")\n";
 }
 
-void demo_passing() {
+void runPassing() {
     std::cout << "──── 7. passing arrays to functions ────\n";
 
     int a[5] = {1, 2, 3, 4, 5};
@@ -209,7 +209,7 @@ void demo_passing() {
 // ──── 8. std::array ────
 // Fixed size known at compile time, but with .size(), .at(), copy,
 // assignment, and STL compatibility.
-void demo_std_array() {
+void runStdArray() {
     std::cout << "──── 8. std::array ────\n";
 
     std::array<int, 5> a = {1, 2, 3, 4, 5};
@@ -238,7 +238,7 @@ struct Point {
     double y;
 };
 
-void demo_array_of_structs() {
+void runArrayOfStructs() {
     std::cout << "──── 9. arrays of structs ────\n";
 
     Point polyline[3] = {
@@ -261,7 +261,7 @@ void demo_array_of_structs() {
 
 // ──── 10. const arrays (lookup tables) ────
 // A const array is read-only after initialization.
-void demo_const_array() {
+void runConstArray() {
     std::cout << "──── 10. const arrays ────\n";
 
     const int daysInMonth[] = {31, 28, 31, 30, 31, 30,
@@ -274,7 +274,7 @@ void demo_const_array() {
 
 
 // ──── 11. common pitfalls ────
-void demo_pitfalls() {
+void runPitfalls() {
     std::cout << "──── 11. common pitfalls ────\n";
 
     // (a) Comparing two arrays with == compares pointers, not contents.
@@ -305,16 +305,16 @@ void demo_pitfalls() {
 // main — runs every demo in order.
 // ════════════════════════════════════════════════════════════
 int main() {
-    demo_declaration();
-    demo_indexing();
-    demo_size();
-    demo_iteration();
-    demo_multidim();
-    demo_array_decay();
-    demo_passing();
-    demo_std_array();
-    demo_array_of_structs();
-    demo_const_array();
-    demo_pitfalls();
+    runDeclaration();
+    runIndexing();
+    runSize();
+    runIteration();
+    runMultidim();
+    runArrayDecay();
+    runPassing();
+    runStdArray();
+    runArrayOfStructs();
+    runConstArray();
+    runPitfalls();
     return 0;
 }

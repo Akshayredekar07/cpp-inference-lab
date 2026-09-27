@@ -29,7 +29,7 @@
 
 // ──── 1. pointer basics: &, *, nullptr ────
 // A pointer holds an ADDRESS. & takes an address, * dereferences it.
-void demo_pointerBasics() {
+void runPointerBasics() {
     std::cout << "──── 1. pointer basics ────\n";
 
     int rollNumber = 21;
@@ -55,7 +55,7 @@ void demo_pointerBasics() {
 
 // ──── 2. const with pointers — three different meanings ────
 // Read right-to-left from the variable name.
-void demo_constPointers() {
+void runConstPointers() {
     std::cout << "\n──── 2. const with pointers ────\n";
 
     int value = 10;
@@ -84,7 +84,7 @@ void demo_constPointers() {
 
 // ──── 3. pointers and arrays — decay, arithmetic, indexing ────
 // An array's name decays into a pointer to its first element.
-void demo_pointersAndArrays() {
+void runPointersAndArrays() {
     std::cout << "\n──── 3. pointers and arrays ────\n";
 
     int marks[5] = {90, 85, 70, 60, 40};
@@ -108,7 +108,7 @@ void demo_pointersAndArrays() {
 
 // ──── 4. pointer to pointer ────
 // A pointer's address can itself be stored in another pointer.
-void demo_pointerToPointer() {
+void runPointerToPointer() {
     std::cout << "\n──── 4. pointer to pointer ────\n";
 
     int value = 5;
@@ -126,7 +126,7 @@ void demo_pointerToPointer() {
 
 // ──── 5. void* — the type-erased pointer ────
 // Can point at anything, but cannot be dereferenced directly.
-void demo_voidPointer() {
+void runVoidPointer() {
     std::cout << "\n──── 5. void* ────\n";
 
     int number = 42;
@@ -146,7 +146,7 @@ void addTenByPointer(int* value) {
     }
 }
 
-void demo_passByPointer() {
+void runPassByPointer() {
     std::cout << "\n──── 6. pass by pointer ────\n";
 
     int marks = 50;
@@ -161,7 +161,7 @@ void demo_passByPointer() {
 
 // ──── 7. dynamic memory: new / delete / new[] / delete[] ────
 // new creates something on the heap; YOU must free it with delete.
-void demo_dynamicMemory() {
+void runDynamicMemory() {
     std::cout << "\n──── 7. dynamic memory ────\n";
 
     int* p = new int(42);             // allocate one int on the heap
@@ -183,7 +183,7 @@ void demo_dynamicMemory() {
 
 // ──── 8. reference basics — alias, must be bound, cannot rebind ────
 // A reference is another name for an existing variable.
-void demo_referenceBasics() {
+void runReferenceBasics() {
     std::cout << "\n──── 8. reference basics ────\n";
 
     int marks = 90;
@@ -218,7 +218,7 @@ void printLength(const std::string& s) {
     // s += "!";   // ERROR: s is const here
 }
 
-void demo_passByReference() {
+void runPassByReference() {
     std::cout << "\n──── 9. pass by reference ────\n";
 
     int marks = 50;
@@ -248,7 +248,7 @@ int& dangerousLocal() {
     return local;                     // local dies when function returns
 }
 
-void demo_returningReferences() {
+void runReturningReferences() {
     std::cout << "\n──── 10. returning references ────\n";
 
     std::vector<int> marks{90, 80, 70};
@@ -266,7 +266,7 @@ void demo_returningReferences() {
 
 // ──── 11. references in range-for ────
 // int& writes, const int& reads without copying.
-void demo_rangeForReferences() {
+void runRangeForReferences() {
     std::cout << "\n──── 11. references in range-for ────\n";
 
     std::vector<int> nums{60, 70, 80};
@@ -291,7 +291,7 @@ void demo_rangeForReferences() {
 void handle(int& x)  { std::cout << "  lvalue overload,  x=" << x   << "\n"; }
 void handle(int&& x) { std::cout << "  rvalue overload,  x=" << x   << "\n"; }
 
-void demo_rvalueReferences() {
+void runRvalueReferences() {
     std::cout << "\n──── 12. rvalue references (preview) ────\n";
 
     int a = 5;
@@ -310,7 +310,7 @@ int apply(int (*op)(int, int), int x, int y) {
     return op(x, y);
 }
 
-void demo_functionPointers() {
+void runFunctionPointers() {
     std::cout << "\n──── 13. function pointers ────\n";
 
     int (*operation)(int, int) = add;
@@ -330,7 +330,7 @@ void maybeUpdate(int* p) {
     if (p) *p = 100;
 }
 
-void demo_pointerVsReference() {
+void runPointerVsReference() {
     std::cout << "\n──── 14. pointer vs reference ────\n";
 
     int x = 1;
@@ -356,72 +356,72 @@ int main() {
 
     // ──── 1. pointer basics ────
     std::cout << "════ 1. pointer basics ════\n";
-    demo_pointerBasics();
+    runPointerBasics();
 
 
     // ──── 2. const with pointers ────
     std::cout << "\n════ 2. const with pointers ════\n";
-    demo_constPointers();
+    runConstPointers();
 
 
     // ──── 3. pointers and arrays ────
     std::cout << "\n════ 3. pointers and arrays ════\n";
-    demo_pointersAndArrays();
+    runPointersAndArrays();
 
 
     // ──── 4. pointer to pointer ────
     std::cout << "\n════ 4. pointer to pointer ════\n";
-    demo_pointerToPointer();
+    runPointerToPointer();
 
 
     // ──── 5. void* ────
     std::cout << "\n════ 5. void* ════\n";
-    demo_voidPointer();
+    runVoidPointer();
 
 
     // ──── 6. pass by pointer ────
     std::cout << "\n════ 6. pass by pointer ════\n";
-    demo_passByPointer();
+    runPassByPointer();
 
 
     // ──── 7. dynamic memory ────
     std::cout << "\n════ 7. dynamic memory ════\n";
-    demo_dynamicMemory();
+    runDynamicMemory();
 
 
     // ──── 8. reference basics ────
     std::cout << "\n════ 8. reference basics ════\n";
-    demo_referenceBasics();
+    runReferenceBasics();
 
 
     // ──── 9. pass by reference ────
     std::cout << "\n════ 9. pass by reference ════\n";
-    demo_passByReference();
+    runPassByReference();
 
 
     // ──── 10. returning references ────
     std::cout << "\n════ 10. returning references ════\n";
-    demo_returningReferences();
+    runReturningReferences();
 
 
     // ──── 11. references in range-for ────
     std::cout << "\n════ 11. references in range-for ════\n";
-    demo_rangeForReferences();
+    runRangeForReferences();
 
 
     // ──── 12. rvalue references (preview) ────
     std::cout << "\n════ 12. rvalue references (preview) ════\n";
-    demo_rvalueReferences();
+    runRvalueReferences();
 
 
     // ──── 13. function pointers ────
     std::cout << "\n════ 13. function pointers ════\n";
-    demo_functionPointers();
+    runFunctionPointers();
 
 
     // ──── 14. pointer vs reference ────
     std::cout << "\n════ 14. pointer vs reference ════\n";
-    demo_pointerVsReference();
+    runPointerVsReference();
 
 
     std::cout << "\n════ done ════\n";

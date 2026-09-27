@@ -31,7 +31,7 @@
 // ──── 1. C-style strings ────
 // A C-string is a char array whose last element is '\0'. Functions
 // like strlen, strcpy walk until they find that zero byte.
-void demo_c_strings() {
+void runCStrings() {
     std::cout << "──── 1. C-style strings ────\n";
 
     char greeting[] = "hello";
@@ -52,7 +52,7 @@ void demo_c_strings() {
 // ──── 2. <cstring> functions ────
 // The C library gives you strlen, strcmp, strcpy, strcat, strchr,
 // strstr, and safer n-bounded variants. They walk until '\0'.
-void demo_cstring_funcs() {
+void runCstringFuncs() {
     std::cout << "──── 2. <cstring> functions ────\n";
 
     char a[32] = "Hello, ";
@@ -76,7 +76,7 @@ void demo_cstring_funcs() {
 
 
 // ──── 3. std::string construction and assignment ────
-void demo_std_string_construction() {
+void runStdStringConstruction() {
     std::cout << "──── 3. std::string construction ────\n";
 
     std::string s1;                       // empty
@@ -98,7 +98,7 @@ void demo_std_string_construction() {
 
 
 // ──── 4. concatenation ────
-void demo_concatenation() {
+void runConcatenation() {
     std::cout << "──── 4. concatenation ────\n";
 
     std::string a = "Hello, ";
@@ -127,7 +127,7 @@ void demo_concatenation() {
 
 // ──── 5. comparison ────
 // Lexicographic comparison via overloaded operators.
-void demo_comparison() {
+void runComparison() {
     std::cout << "──── 5. comparison ────\n";
 
     std::string a = "apple";
@@ -144,7 +144,7 @@ void demo_comparison() {
 // ──── 6. length, capacity, reserve ────
 // size() == length(). capacity() is how much fits before reallocation.
 // reserve(n) asks for at least n up front; resize(n) changes the size.
-void demo_length_capacity() {
+void runLengthCapacity() {
     std::cout << "──── 6. length, capacity, reserve ────\n";
 
     std::string s;
@@ -166,7 +166,7 @@ void demo_length_capacity() {
 // ──── 7. accessing characters ────
 // operator[] is unchecked; .at() throws; .c_str() returns a
 // null-terminated const char* usable by C APIs.
-void demo_access() {
+void runAccess() {
     std::cout << "──── 7. accessing characters ────\n";
 
     std::string s = "hello";
@@ -192,7 +192,7 @@ void demo_access() {
 
 // ──── 8. substr, find, replace ────
 // All return size_t positions or std::string::npos when not found.
-void demo_substr_find_replace() {
+void runSubstrFindReplace() {
     std::cout << "──── 8. substr, find, replace ────\n";
 
     std::string s = "Hello, world";
@@ -215,7 +215,7 @@ void demo_substr_find_replace() {
 
 
 // ──── 9. modifiers ────
-void demo_modifiers() {
+void runModifiers() {
     std::cout << "──── 9. modifiers (insert, erase, remove-erase) ────\n";
 
     std::string s = "Hello world";
@@ -237,7 +237,7 @@ void demo_modifiers() {
 
 
 // ──── 10. iteration ────
-void demo_iteration() {
+void runIteration() {
     std::cout << "──── 10. iteration ────\n";
 
     std::string s = "hello";
@@ -267,7 +267,7 @@ void demo_iteration() {
 
 
 // ──── 11. numeric conversions ────
-void demo_numeric_conversions() {
+void runNumericConversions() {
     std::cout << "──── 11. numeric conversions ────\n";
 
     int    i = std::stoi("42");
@@ -294,7 +294,7 @@ void print_twice(std::string_view sv) {
     std::cout << "  print_twice: \"" << sv << "\" \"" << sv << "\"\n";
 }
 
-void demo_string_view() {
+void runStringView() {
     std::cout << "──── 12. std::string_view ────\n";
 
     std::string owned = "hello";
@@ -316,7 +316,7 @@ void demo_string_view() {
 // ──── 13. stream input ────
 // >> reads one whitespace-delimited word. getline reads the whole
 // line. Mixing them needs care because >> leaves a trailing '\n'.
-void demo_stream_input() {
+void runStreamInput() {
     std::cout << "──── 13. stream input (>> vs getline) ────\n";
 
     // We can't really call std::cin here without a real terminal,
@@ -333,7 +333,7 @@ void demo_stream_input() {
 
 
 // ──── 14. common pitfalls ────
-void demo_pitfalls() {
+void runPitfalls() {
     std::cout << "──── 14. common pitfalls ────\n";
 
     // (a) Returning a string_view to a local std::string.
@@ -371,19 +371,19 @@ void demo_pitfalls() {
 // main — runs every demo in order.
 // ════════════════════════════════════════════════════════════
 int main() {
-    demo_c_strings();
-    demo_cstring_funcs();
-    demo_std_string_construction();
-    demo_concatenation();
-    demo_comparison();
-    demo_length_capacity();
-    demo_access();
-    demo_substr_find_replace();
-    demo_modifiers();
-    demo_iteration();
-    demo_numeric_conversions();
-    demo_string_view();
-    demo_stream_input();
-    demo_pitfalls();
+    runCStrings();
+    runCstringFuncs();
+    runStdStringConstruction();
+    runConcatenation();
+    runComparison();
+    runLengthCapacity();
+    runAccess();
+    runSubstrFindReplace();
+    runModifiers();
+    runIteration();
+    runNumericConversions();
+    runStringView();
+    runStreamInput();
+    runPitfalls();
     return 0;
 }

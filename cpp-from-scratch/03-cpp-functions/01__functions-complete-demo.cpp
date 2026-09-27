@@ -313,6 +313,7 @@ int main() {
     std::cout << "nextId() = " << nextId() << "\n";
     // counter survives across calls — initialized only once.
 
+    
 
     // ──── 11. function pointer ────
     std::cout << "\n════ 11. function pointer ════\n";
