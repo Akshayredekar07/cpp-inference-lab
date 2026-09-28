@@ -2,31 +2,31 @@
 
 ## **Table of Contents**
 
-1. Why learn C++ (and why now)
+1. Why learn C++
 2. What is C++
 3. How C++ relates to C
-4. Structure of a C++ program
+4. How a C++ program is laid out
 5. Comments
 6. Function basics
-7. Header and source file separation
-8. Compilation and linking
-9. `using namespace std;` — what it does and why we avoid it
+7. Splitting code into header and source files
+8. Compiling and linking
+9. `using namespace std;` and why we skip it
 10. Practice problems
 
 ---
 
-## **1. Why Learn C++ (and Why Now)**
+## **1. Why Learn C++**
 
-### **Why this matters before you touch syntax**
+### **Read this before you look at any syntax**
 
-- Every other language you've used (Python, JS) hides memory management and compilation from you. C++ does not — you will see *how a program actually becomes an executable*. That understanding transfers to debugging, performance, and reading any lower-level system later.
-- C++ is not "harder Python." It is a different mental model: you decide types, memory, and lifetimes explicitly. The payoff is speed and control; the cost is more upfront rules.
-- As a beginner, the goal in this file is NOT to memorize every rule. It's to get a working mental model of: compiler vs linker, declaration vs definition, and pass-by-value vs pass-by-reference. Everything else builds on these three.
+- Python and JS hide a lot from you: memory, and how your code becomes something that runs. C++ doesn't hide it. You get to see how a program actually turns into an executable. That helps later when you debug, tune speed, or read low-level code.
+- C++ is not "Python but harder." It works differently. You choose the types, you decide how memory is used, and you decide how long things live. In return you get speed and control. The price is more rules up front.
+- Right now, don't try to memorize every rule. Just get a rough picture of three things: compiler vs linker, declaration vs definition, and pass-by-value vs pass-by-reference. Everything else builds on these.
 
-### **What "new" means when learning C++**
+### **Who this is for**
 
-- If you know C, Python, or JS: the concepts (variables, functions, loops) are familiar — but C++ enforces static types and gives you direct memory control, which those languages don't.
-- If you're a first-time programmer: don't skip ahead. `main()`, functions, and compilation are the foundation every later topic (classes, templates, memory management) depends on.
+- If you know C, Python or JS: loops, variables and functions will feel familiar. What's different is that C++ makes you fix types up front and lets you touch memory directly.
+- If this is your first language: don't skip ahead. `main()`, functions and compilation are the base for everything later (classes, templates, memory).
 
 ---
 
@@ -34,20 +34,20 @@
 
 ### **Definition**
 
-- C++ is a compiled, statically-typed, multi-paradigm programming language.
-- "Compiled" — the source is translated to machine code by a compiler before you run it. (Contrast: Python is interpreted line-by-line at runtime.)
-- "Statically-typed" — every variable, parameter, and return value has a type known at compile time. The compiler catches type errors before the program ever runs.
-- "Multi-paradigm" — supports procedural, object-oriented, generic, and functional styles. You are not forced into one way of structuring code.
+- C++ is a **compiled**, **statically-typed**, **multi-paradigm** language. Three big words, so here is each one in plain terms:
+- **Compiled**: a tool called a compiler turns your source code into machine code *before* you run it. Python works differently: it reads and runs your code line by line while the program is running.
+- **Statically-typed**: every variable, parameter and return value has a type that is fixed when you write the code. The compiler catches type mistakes before the program ever runs.
+- **Multi-paradigm**: you can write in several styles (step-by-step procedures, objects, generic code, functional style). You are not stuck with one.
 
 ### **Where C++ is used**
 
-- Operating systems, drivers, embedded firmware (low-level control + zero-cost abstractions).
-- Game engines, real-time graphics, simulation (Unreal Engine, most AAA studios).
-- High-performance backends, databases, compilers, search engines.
-- Quantitative finance, scientific computing, browser engines (Chrome/Firefox), HFT systems.
-- Inference / ML runtimes (the C++ track in `cpp_inference_roadmap.md` continues from here).
+- Operating systems, drivers, and code inside devices (embedded). It gives low-level control without wasting speed.
+- Game engines, real-time graphics, simulations (Unreal Engine, most big game studios).
+- Fast backends, databases, compilers, search engines.
+- Trading and finance, scientific computing, web browsers (Chrome, Firefox), high-frequency trading.
+- ML inference runtimes. The C++ track in `cpp_inference_roadmap.md` continues from here.
 
-### **Hello, C++ (with `std::` — the correct default)**
+### **Hello, C++ (using `std::`, which is the right default)**
 
 ```cpp
 // hello.cpp
@@ -69,20 +69,20 @@ g++ -std=c++17 -Wall -Wextra hello.cpp -o hello.exe
 Hello, C++
 ```
 
-### **What each piece means, line by line**
+### **What each line does**
 
-- `#include <iostream>` — pulls in declarations for input/output (`std::cout`, `std::cin`). Without this line, `std::cout` does not exist as far as the compiler knows.
-- `int main()` — the entry point. The operating system calls this function to start your program.
-- `std::cout << "..."` — `cout` is "character output," the `<<` operator sends the string to it. `std` is the namespace `cout` lives in (see Section 9).
-- `return 0;` — tells the OS the program finished successfully. Non-zero means "something went wrong."
+- `#include <iostream>`: brings in the input/output tools (`std::cout`, `std::cin`). Without this line, the compiler has never heard of `std::cout`.
+- `int main()`: where the program starts. The operating system calls this function to run your program.
+- `std::cout << "..."`: `cout` means "character output." The `<<` sends the text into it. `std` is the namespace (a named box) that `cout` lives in. More on this in Section 9.
+- `return 0;`: tells the OS "I finished fine." Any non-zero number means "something went wrong."
 
-### **Toolchain components you should know the names of**
+### **Names of the tools that build your program**
 
-- **Preprocessor** — text substitution (`#include`, `#define`, `#ifdef`). Runs first.
-- **Compiler** — translates preprocessed C++ to assembly / object code.
-- **Assembler** — turns assembly into an object file (`.o` / `.obj`).
-- **Linker** — combines object files and libraries, resolves symbols, produces an executable.
-- **Standard library** — ships with the toolchain (`libstdc++` for GCC). Provides `std::cout`, `std::string`, containers, algorithms, threads, filesystem, etc.
+- **Preprocessor**: does simple text find-and-replace jobs (`#include`, `#define`, `#ifdef`). Runs first.
+- **Compiler**: turns the preprocessed C++ into assembly / object code.
+- **Assembler**: turns assembly into an object file (`.o` / `.obj`).
+- **Linker**: joins object files and libraries together, matches up names, and produces the final executable.
+- **Standard library**: comes with your compiler (`libstdc++` for GCC). It gives you `std::cout`, `std::string`, containers, algorithms, threads, filesystem, and more.
 
 ---
 
@@ -90,7 +90,7 @@ Hello, C++
 
 ### **C is mostly a subset of C++**
 
-Most valid C compiles as C++. The differences are real but small in practice.
+Most valid C code also compiles as C++. There are differences, but in daily work they are small.
 
 ```cpp
 // Valid in C90, still valid in C++17
@@ -101,7 +101,7 @@ int main(void) {
 }
 ```
 
-### **Practical: a C file that fails to compile as C++**
+### **Example: C code that fails to compile as C++**
 
 ```c
 // bad_as_cpp.c
@@ -118,12 +118,12 @@ int main(void) {
 g++ bad_as_cpp.c -o bad          # ERROR: cannot initialize 'int*' with 'void*'
 ```
 
-**Fix:** cast (`(int*)malloc(...)`) or use `new int[4]{0,1,2,3};` and `delete[] p;`.
+**Fix:** add a cast, `(int*)malloc(...)`, or use `new int[4]{0,1,2,3};` and `delete[] p;`.
 
-### **Beginner example: same logic, C style vs C++ style**
+### **Same logic, C style vs C++ style**
 
 ```cpp
-// c_style.cpp — works, but not idiomatic C++
+// c_style.cpp — works, but not the normal C++ way
 #include <cstdio>
 int main() {
     int arr[3] = {1, 2, 3};
@@ -133,7 +133,7 @@ int main() {
 ```
 
 ```cpp
-// cpp_style.cpp — idiomatic: use std::array + range-based for
+// cpp_style.cpp — the C++ way: std::array + range-based for
 #include <array>
 #include <iostream>
 
@@ -144,28 +144,26 @@ int main() {
 }
 ```
 
-### **What's new in C++ (the short list)**
+### **What C++ added over the years (short list)**
 
-- C++98/03 — classes, templates, STL containers/algorithms, exceptions, RTTI.
-- C++11 — move semantics, `auto`, range-`for`, lambdas, `nullptr`, smart pointers, `constexpr`, threads, `std::array`/`std::unordered_map`.
-- C++14 — generic lambdas, `std::make_unique`.
-- C++17 — `std::optional`, `std::variant`, `std::string_view`, structured bindings, `if constexpr`, `inline` variables, filesystem.
-- C++20 — concepts, ranges, coroutines, modules, `consteval`/`constinit`, three-way comparison `<=>`, `std::span`.
-- C++23 — `std::expected`, `std::flat_map`, deducing `this`, `if consteval`.
-- C++26 — contracts, reflection, pattern matching (in progress).
+- C++98/03: classes, templates, STL containers and algorithms, exceptions, RTTI.
+- C++11: move semantics, `auto`, range-`for`, lambdas, `nullptr`, smart pointers, `constexpr`, threads, `std::array` / `std::unordered_map`.
+- C++14: generic lambdas, `std::make_unique`.
+- C++17: `std::optional`, `std::variant`, `std::string_view`, structured bindings, `if constexpr`, `inline` variables, filesystem.
+- Newer versions (C++20, 23, 26) add more. We'll cover them together at the end, after the core material. For now, stick to C++11/14/17.
 
 ---
 
-## **4. Structure of a C++ Program**
+## **4. How a C++ Program Is Laid Out**
 
-### **Anatomy of a C++ program**
+### **The parts, top to bottom**
 
-A typical C++ source file has these parts, top to bottom:
+A normal C++ source file has these parts, in this order:
 
-- **Preprocessor directives** — `#include`, `#define`, `#ifdef`. Run before the compiler.
-- **Using declarations / directives** — bring names from a namespace into scope (often omitted in headers).
-- **Global declarations** — constants, type aliases, function prototypes, class/struct declarations.
-- **Function definitions** — including `main`. `main` is the entry point.
+- **Preprocessor lines**: `#include`, `#define`, `#ifdef`. These run before the compiler does.
+- **Using lines**: bring names from a namespace into scope. Usually left out of headers.
+- **Global declarations**: constants, type aliases, function prototypes, class/struct declarations.
+- **Function definitions**: including `main`, where the program starts.
 
 ```cpp
 // anatomy.cpp
@@ -188,13 +186,13 @@ int area(int radius) {               // 6. Function definition
 }
 ```
 
-### **The `main` function rules**
+### **Rules for `main`**
 
-- `main` is the entry point called by the runtime. Every C++ program has exactly one `main`.
-- Return type must be `int`. The value becomes the process exit code (0 = success, non-zero = error).
-- Two legal forms: `int main()` and `int main(int argc, char* argv[])`.
-- If you omit `return 0;` in `main`, the compiler inserts it for you (special case — this is the ONE function in C++ where a missing return is not an error).
-- Other functions can return `void`; `main` cannot.
+- `main` is where the program starts. Every C++ program has exactly one.
+- It must return `int`. That number becomes the exit code (0 = success, anything else = error).
+- Two allowed forms: `int main()` and `int main(int argc, char* argv[])`.
+- If you leave out `return 0;` in `main`, the compiler adds it for you. This is the one function where a missing return is fine.
+- Other functions can return `void`. `main` cannot.
 
 ```cpp
 // Two legal main signatures you will actually use
@@ -209,11 +207,11 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-### **Statements and expressions**
+### **Statements, expressions and blocks**
 
-- A **statement** performs an action and ends with `;`.
-- An **expression** produces a value (a literal, a variable, a function call, an operator chain).
-- A **block** is a sequence of statements inside `{ }`. Blocks introduce scope.
+- A **statement** does something and ends with `;`.
+- An **expression** produces a value (a literal, a variable, a function call, a chain of operators).
+- A **block** is a group of statements inside `{ }`. Each block has its own scope, meaning names declared inside it are not visible outside.
 
 ```cpp
 int main() {
@@ -231,10 +229,10 @@ int main() {
 
 ### **Punctuation that matters**
 
-- `;` ends a statement (REQUIRED).
-- `{ }` groups statements into a block / function / class body.
-- `()` are for function calls, parameter lists, and grouping expressions.
-- `,` separates items in lists; it's also a low-precedence operator.
+- `;` ends a statement. Required.
+- `{ }` groups statements into a block, a function body or a class body.
+- `()` are used for function calls, parameter lists and grouping expressions.
+- `,` separates items in a list. It is also an operator with very low priority.
 
 ---
 
@@ -269,15 +267,15 @@ int main() {
 }
 ```
 
-### **Important rules and pitfalls**
+### **Rules and traps**
 
-- Block comments **do not nest** in C or C++. The first `*/` ends the comment.
+- Block comments **do not nest** in C or C++. The first `*/` ends the comment, no matter what.
 
 ```cpp
 /* outer /* inner */ still outer */     // ERROR: the first */ ends the comment
 ```
 
-- Use `//` for most cases. Reserve `/* */` for temporarily disabling code blocks.
+- Use `//` most of the time. Keep `/* */` for switching off a chunk of code for a while.
 
 ```cpp
 // Temporarily disable code:
@@ -290,8 +288,8 @@ int broken() {
 
 ### **Documentation comments**
 
-- `///` and `/** */` are recognized by Doxygen, Standardese, and most editors as documentation comments.
-- They sit immediately above the declaration they document.
+- `///` and `/** */` are picked up by Doxygen and by most editors as documentation.
+- Put them right above the thing they describe.
 
 ```cpp
 /**
@@ -304,7 +302,7 @@ int area(int radius);
 
 ### **Comments and the preprocessor**
 
-`#if 0` / `#endif` is a robust alternative to `/* */` for disabling code, because it can hold code containing `*/` and nested comments.
+`#if 0` ... `#endif` is a safer way to switch off code than `/* */`. It works even if the code inside already contains `*/` or other comments.
 
 ```cpp
 #if 0
@@ -319,12 +317,12 @@ int broken() {
 
 ## **6. Function Basics**
 
-A function is a named, parameterized block of code that returns a value (or `void`).
+A function is a named piece of code that takes inputs (parameters) and gives back a value (or nothing, if it's `void`).
 
 ### **Declaration vs definition**
 
-- A **declaration** tells the compiler the function's signature: name, return type, parameter types. Ends with `;`.
-- A **definition** is a declaration plus the body. Exactly one definition must exist for each function in the program (the one-definition rule, ODR).
+- A **declaration** tells the compiler what the function looks like: its name, return type and parameter types. It ends with `;`.
+- A **definition** is the declaration plus the body. Each function must have exactly one definition in the whole program. This is called the one-definition rule (ODR).
 
 ```cpp
 // declaration
@@ -356,9 +354,9 @@ int add(int a, int b) {   // definition
 
 ### **Parameters and return values**
 
-- Parameters are local variables initialized by the caller's arguments.
-- The return type must be specified; use `void` for "no return value".
-- A non-void function that falls off the end without `return` is undefined behavior (UB) — except `main`, which returns 0 implicitly.
+- Parameters are local variables. They start out with the values the caller passed in.
+- You must state a return type. Use `void` when nothing is returned.
+- If a non-void function reaches the end without a `return`, the behavior is undefined (UB), meaning anything can happen. `main` is the only exception; it returns 0 automatically.
 
 ```cpp
 void log_msg(const char* s) {
@@ -369,8 +367,8 @@ void log_msg(const char* s) {
 
 ### **Function overloading**
 
-- Same name, different parameter list. The compiler picks the right one by argument types.
-- Return type alone doesn't distinguish overloads.
+- You can reuse the same function name with different parameter lists. The compiler picks the right one based on the arguments you pass.
+- A different return type alone is not enough to make two overloads.
 
 ```cpp
 #include <iostream>
@@ -387,16 +385,17 @@ int main() {
     print(true);
     print(std::string("Ada"));
     // print("Ada");   // Careful: a string literal is const char*, not std::string.
-                        // Without a const char* overload, this either fails to compile
-                        // or silently matches the wrong overload depending on your compiler.
+                        // With the four overloads above, this quietly calls print(bool),
+                        // because a pointer converts to bool more easily than it
+                        // converts to std::string. It compiles, but gives the wrong result.
     return 0;
 }
 ```
 
 ### **Default arguments**
 
-- Parameters with default values must come **after** parameters without defaults.
-- Default values are filled in by the compiler at the call site.
+- Parameters that have default values must come **after** the ones that don't.
+- The compiler fills in the defaults at the place where you call the function.
 
 ```cpp
 #include <iostream>
@@ -415,14 +414,14 @@ int main() {
 
 ### **Pass-by-value vs pass-by-reference vs pass-by-pointer**
 
-This is the single most important beginner concept in this file. Get this right and half of C++'s "confusing" behavior stops being confusing.
+This is the most important idea in this file for a beginner. Get this right and a lot of "confusing" C++ behavior stops being confusing.
 
-| Style | Caller sees the change? | Copies the argument? | Use when |
-|-------|--------------------------|----------------------|----------|
+| Style | Does caller see the change? | Is the argument copied? | Use it when |
+|-------|-----------------------------|-------------------------|-------------|
 | `void f(T x)` | No | Yes | Small types (`int`, `double`, pointer) |
-| `void f(T& x)` | Yes | No | Callee must mutate the caller's object |
-| `void f(const T& x)` | No | No | Large object you only read |
-| `void f(T* x)` | Yes (via dereference) | No (pointer copies) | Optional input, C interop, nullable |
+| `void f(T& x)` | Yes | No | The function must change the caller's object |
+| `void f(const T& x)` | No | No | Big object that you only read |
+| `void f(T* x)` | Yes (through the pointer) | No (only the pointer is copied) | Optional input, C interop, can be null |
 
 ```cpp
 #include <iostream>
@@ -444,7 +443,7 @@ int main() {
 }
 ```
 
-### **Beginner walk-through: why `by_value` doesn't change `a`**
+### **Walk-through: why `by_value` doesn't change `a`**
 
 ```cpp
 #include <iostream>
@@ -467,10 +466,12 @@ int main() {
 }
 ```
 
-### **`[[nodiscard]]`, `noexcept`, attributes**
+Think of it like this: pass-by-value hands the function a photocopy of your paper. It can scribble on the copy all it wants, and your original stays clean. A reference hands over the original.
 
-- `[[nodiscard]]` — the compiler warns if the caller ignores the return value.
-- `noexcept` — the function promises not to throw; enables some compiler optimizations.
+### **`[[nodiscard]]` and `noexcept`**
+
+- `[[nodiscard]]`: the compiler warns you if you call the function and ignore what it returns.
+- `noexcept`: promises the function will never throw an exception. This lets the compiler optimize better.
 
 ```cpp
 #include <iostream>
@@ -484,9 +485,9 @@ int main() {
 }
 ```
 
-### **Function-local `static`**
+### **`static` variables inside a function**
 
-A `static` local variable persists across calls and is initialized only on the first call.
+A `static` local variable keeps its value between calls. It is set up only once, the first time the function runs.
 
 ```cpp
 #include <iostream>
@@ -506,20 +507,20 @@ int main() {
 
 ---
 
-## **7. Header and Source File Separation**
+## **7. Splitting Code Into Header and Source Files**
 
-Real programs split into multiple files. The convention:
+Real programs are split across many files. The usual habit:
 
-- `.h` / `.hpp` (header) — **declarations**: prototypes, class/struct definitions, templates, `inline` functions, `constexpr` variables.
-- `.cpp` / `.cc` / `.cxx` (source) — **definitions**: function bodies, non-inline member definitions, file-scope statics.
+- `.h` / `.hpp` (header): holds **declarations**: prototypes, class/struct definitions, templates, `inline` functions, `constexpr` variables.
+- `.cpp` / `.cc` / `.cxx` (source): holds **definitions**: function bodies, non-inline member functions, file-level statics.
 
 ### **Why split?**
 
-- Compilation speed: edit one `.cpp` and only that file recompiles.
-- Sharing: multiple `.cpp` files can include the same header.
-- Encapsulation: header exposes interface, source hides implementation.
+- Faster builds: if you edit one `.cpp`, only that file needs to be compiled again.
+- Sharing: many `.cpp` files can include the same header.
+- Hiding details: the header shows what's available, the source hides how it works.
 
-### **Basic split — math utilities**
+### **Basic example: math utilities**
 
 ```cpp
 // math_utils.h
@@ -560,9 +561,9 @@ g++ -std=c++17 -Wall -Wextra main.cpp math_utils.cpp -o app
 ./app
 ```
 
-### **What happens if you forget `#pragma once`**
+### **What goes wrong without `#pragma once`**
 
-If `math_utils.h` gets `#include`d twice into the same `.cpp` (e.g., through two different headers that both include it), the compiler sees the declarations twice and errors out with "redefinition." `#pragma once` (or classic `#ifndef`/`#define` guards) tells the preprocessor "only paste this file's contents in once per translation unit."
+Say `math_utils.h` gets included twice into the same `.cpp` (for example, two different headers both include it). The compiler then sees the same declarations twice and fails with a "redefinition" error. `#pragma once` (or the older `#ifndef` / `#define` guards) tells the preprocessor: "paste this file in only once."
 
 ```cpp
 // The old-style equivalent of #pragma once, if your toolchain lacks it:
@@ -574,9 +575,9 @@ int add(int a, int b);
 #endif // MATH_UTILS_H
 ```
 
-### **Intermediate — `inline` definitions in a header**
+### **Next step: `inline` functions in a header**
 
-If you put a non-`inline` function definition in a header and include it in two `.cpp` files, you get a linker error (multiple definitions). Mark it `inline` to allow that.
+If you put a normal function definition in a header and include it from two `.cpp` files, the linker complains about multiple definitions. Mark the function `inline` and that problem goes away.
 
 ```cpp
 // math_utils.h
@@ -604,9 +605,9 @@ g++ -std=c++17 -Wall -Wextra main.cpp -o app
 ./app
 ```
 
-### **Advanced — `inline` variables (C++17)**
+### **Advanced: `inline` variables (C++17)**
 
-C++17 lets you define a global variable in a header (with `inline`) and every translation unit that includes the header sees the same object.
+Since C++17 you can define a global variable in a header using `inline`. Every file that includes the header then shares the same single object.
 
 ```cpp
 // config.h
@@ -628,16 +629,16 @@ int main() {
 }
 ```
 
-### **Best practices for headers**
+### **Good habits for headers**
 
 - Always use include guards or `#pragma once`.
-- Never put `using namespace std;` in a header (see Section 9 for why this is worse in headers than in `.cpp` files).
-- Forward-declare what you can instead of including the full header.
-- Put templates, `inline` functions, and `constexpr` variables in headers (their definitions must be visible to the compiler).
+- Never put `using namespace std;` in a header (Section 9 explains why it hurts more there than in a `.cpp`).
+- Forward-declare when you can, instead of including the full header.
+- Templates, `inline` functions and `constexpr` variables belong in headers, because the compiler needs to see their full definitions.
 
 ---
 
-## **8. Compilation and Linking**
+## **8. Compiling and Linking**
 
 ### **The pipeline**
 
@@ -657,7 +658,7 @@ int main() {
    executable (or library)
 ```
 
-### **Step-by-step: what the compiler actually does**
+### **Step by step: what the compiler does**
 
 ```bash
 # 1. Preprocess only
@@ -680,7 +681,7 @@ g++ main.cpp math_utils.cpp -o app
 
 ### **Translation unit (TU)**
 
-A TU is one `.cpp` file plus every header it (transitively) `#include`s, after preprocessing. Each TU compiles to one object file.
+A TU is one `.cpp` file plus every header it includes (directly or through other headers), after the preprocessor is done. Each TU becomes one object file.
 
 ### **Object file basics**
 
@@ -698,33 +699,33 @@ Sample output:
                  U __cxa_atexit
 ```
 
-- `T` — defined text (code) symbol.
-- `U` — undefined (will be resolved by the linker).
-- `_Z3addii` — name-mangled version of `add(int, int)`. The linker demangles for you in errors.
+- `T`: a symbol (function) that is defined in this file.
+- `U`: an undefined symbol. The linker will look for it elsewhere.
+- `_Z3addii`: the "mangled" name for `add(int, int)`. The compiler scrambles names like this so overloads can be told apart. Linker error messages usually turn it back into readable form for you.
 
 ### **What the linker does**
 
-- Resolves `U` symbols by finding their `T` definition in another object file or library.
-- Reports undefined references if a symbol is used but never defined.
-- Reports multiple definitions if a non-`inline` symbol is defined twice.
-- Produces the final executable (or `.a` / `.so` / `.dll` library).
+- Finds a definition (`T`) for each `U` symbol, in another object file or in a library.
+- Reports "undefined reference" if something is used but never defined.
+- Reports "multiple definition" if a non-`inline` symbol is defined twice.
+- Produces the final executable (or a `.a` / `.so` / `.dll` library).
 
-### **Common linker errors and how to read them**
+### **Common linker errors and what they mean**
 
 ```text
 undefined reference to `foo()'
 collect2: error: ld returned 1 exit status
 ```
 
-- You declared `foo()` (probably via a header) but never defined it. Either add the definition, or link the object/library that defines it.
+- You declared `foo()` (probably in a header) but never wrote its body. Either add the definition, or link in the object file or library that has it.
 
 ```text
 multiple definition of `bar'
 ```
 
-- A non-`inline` symbol is defined in more than one TU. Mark it `inline`, or move the definition to a single `.cpp`, or declare it `extern` in the header and define it once.
+- A non-`inline` symbol is defined in more than one TU. Fix it by marking it `inline`, or by keeping the definition in only one `.cpp`, or by declaring it `extern` in the header and defining it once.
 
-### **Building with separate compilation (the realistic workflow)**
+### **A realistic build: compile each file, then link**
 
 ```bash
 # One .cpp -> one .o, then link
@@ -749,36 +750,36 @@ cmake --build build
 ./build/app
 ```
 
-### **Build with optimization levels**
+### **Optimization levels**
 
 | Flag | What it does |
 |------|--------------|
-| `-O0` | No optimization (default). Fastest to compile, slowest to run. Use for debugging. |
+| `-O0` | No optimization (the default). Compiles fastest, runs slowest. Use it for debugging. |
 | `-O1` | Basic optimization. |
-| `-O2` | Standard release optimization. Safe. |
-| `-O3` | Aggressive: inlining, vectorization, loop transforms. May increase binary size. |
-| `-Os` | Optimize for size. |
-| `-Og` | Optimize for debugging experience (GCC 4.8+). |
-| `-march=native` | Enable CPU-specific instructions (AVX, SSE) on the build host. |
+| `-O2` | Standard choice for release builds. Safe. |
+| `-O3` | Aggressive: inlining, vectorization, loop tricks. Can make the binary bigger. |
+| `-Os` | Optimize for small size. |
+| `-Og` | Optimize while keeping debugging pleasant (GCC 4.8+). |
+| `-march=native` | Use special instructions of the CPU you build on (AVX, SSE). |
 
-### **Useful warnings to turn on**
+### **Warnings worth turning on**
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wold-style-cast \
     main.cpp math_utils.cpp -o app
 ```
 
-- `-Wall`, `-Wextra` — common warnings. Always on.
-- `-Wpedantic` — warn about non-standard extensions.
-- `-Wshadow` — warn when a local shadows another.
-- `-Wconversion` — warn about implicit narrowing conversions.
-- `-Wold-style-cast` — flag C-style casts (use `static_cast` etc.).
-- Treat warnings as errors in CI: `-Werror`.
+- `-Wall`, `-Wextra`: the common warnings. Keep them always on.
+- `-Wpedantic`: warns when you use non-standard compiler extensions.
+- `-Wshadow`: warns when a local variable hides another variable with the same name.
+- `-Wconversion`: warns about implicit conversions that may lose data.
+- `-Wold-style-cast`: flags C-style casts (use `static_cast` and friends instead).
+- In CI, turn warnings into errors with `-Werror`.
 
-### **Static vs dynamic libraries (preview)**
+### **Static vs dynamic libraries (quick preview)**
 
-- Static library (`.a` / `.lib`) — linked at build time. Code is copied into the executable.
-- Dynamic library (`.so` / `.dll`) — loaded at runtime. Smaller executables, easier to update, but introduces deployment complexity.
+- Static library (`.a` / `.lib`): joined into your executable at build time. The code is copied in.
+- Dynamic library (`.so` / `.dll`): loaded when the program runs. Executables are smaller and updates are easier, but deploying gets more complicated.
 
 ```bash
 # Build a static library
@@ -791,12 +792,12 @@ g++ main.cpp -L. -lmath_utils -o app
 
 ---
 
-## **9. `using namespace std;` — What It Does and Why We Avoid It**
+## **9. `using namespace std;` and Why We Skip It**
 
-### **What it actually does**
+### **What it does**
 
-- `std::cout`, `std::string`, `std::vector`, etc. all live inside a namespace called `std` — a container that prevents name clashes between the standard library and your own code.
-- `using namespace std;` tells the compiler "make every name in `std` available without the `std::` prefix," for the rest of that scope.
+- `std::cout`, `std::string`, `std::vector` and the rest all live inside a namespace called `std`. A namespace is a named box that stops the standard library's names from clashing with yours.
+- `using namespace std;` says to the compiler: "let me use everything in `std` without typing `std::`", for the rest of that scope.
 
 ```cpp
 #include <iostream>
@@ -808,33 +809,30 @@ int main() {
 }
 ```
 
-### **Why this file uses `std::` everywhere instead**
+### **Why these notes always write `std::`**
 
-- `std` contains thousands of names (`count`, `sort`, `distance`, `max`, `min`, `move`, `data`, `swap`...). The moment you write a variable, function, or parameter with one of those names, `using namespace std;` creates ambiguity the compiler may or may not catch.
+- `std` has thousands of names (`count`, `sort`, `distance`, `max`, `min`, `move`, `data`, `swap`...). If you name your own variable or function one of these while `using namespace std;` is on, you can hit name clashes.
 
 ```cpp
 #include <algorithm>
 #include <iostream>
 using namespace std;
 
-int count = 5;              // shadows std::count — compiles, but now
-                             // any later call to the algorithm std::count()
-                             // in this scope needs the full std:: form anyway,
-                             // defeating the point and confusing future you.
+int count = 5;              // your global 'count' now competes with std::count
 
 int main() {
-    cout << count << "\n";
+    cout << count << "\n";  // ERROR: ambiguous — is it ::count or std::count?
     return 0;
 }
 ```
 
-- In a header file, `using namespace std;` pollutes every `.cpp` that includes it — even ones that never wanted it. This is why it is banned in headers by essentially every style guide, including the practice this roadmap follows.
-- As your files grow past a single-file demo, tracing "where did this name come from" gets harder without the `std::` marker. Explicit `std::` is free documentation.
+- In a header file it is even worse. `using namespace std;` leaks into every `.cpp` that includes that header, including ones that never asked for it. That is why almost every style guide bans it in headers.
+- As your project grows, it gets hard to tell where a name came from. Writing `std::` is free documentation.
 
-### **When people reach for it anyway**
+### **When people still use it**
 
-- Competitive programming / single-file scratch scripts where the whole program is 30 lines and will never be reused or extended.
-- Even then, a safer middle ground exists: bring in only the specific names you need.
+- Competitive programming and tiny one-file scratch programs (around 30 lines) that nobody will reuse.
+- Even then, there is a safer middle option: pull in only the specific names you need.
 
 ```cpp
 #include <iostream>
@@ -850,27 +848,27 @@ int main() {
 }
 ```
 
-### **The rule this roadmap follows**
+### **The rule we follow**
 
-- Write `std::` explicitly in every example, every project, every topic folder. It is one extra word per line and it removes an entire category of bugs before they exist.
+- Write `std::` explicitly in every example, every project, every topic folder. It's one extra word per line, and it removes a whole group of bugs before they can happen.
 
 ---
 
 ## **10. Practice Problems**
 
-- [ ] **Build a Hello program** in 3 ways: single file (g++ one-shot), precompiled object + link, and with CMake. Compare artifacts.
-- [ ] **Type sizes** — write a program that prints `sizeof(bool)`, `sizeof(char)`, `sizeof(wchar_t)`, `sizeof(int)`, `sizeof(long)`, `sizeof(long long)`, `sizeof(float)`, `sizeof(double)`, `sizeof(long double)`, `sizeof(std::string)`, `sizeof(void*)`. Build it on your machine and note the values.
-- [ ] **Comment playground** — try to compile a file with a `/*` inside a `/* ... */` block and observe the error. Fix it using `#if 0`.
-- [ ] **Overload `print`** — write four overloads: `print(int)`, `print(double)`, `print(const std::string&)`, `print(bool)`. Test that `print(0)`, `print(0.0)`, `print("hi")` pick the right ones. (Hint: `print("hi")` is a `const char*`, not `std::string` — fix by adding that overload or by explicit `print(std::string("hi"))`.)
-- [ ] **Default arguments** — write a `make_window(width, height, title = "App", fullscreen = false)` that prints the params. Call it with 1, 2, 3, and 4 args.
-- [ ] **Pass-by-value vs reference** — write a `swap(T&, T&)` template-like overload for `int` and `std::string`. Verify the caller sees the change.
-- [ ] **Reference confusion drill** — write `increment_wrong(int x)` and `increment_right(int& x)` yourself from scratch (don't copy this file), predict the output on paper, then compile and check.
-- [ ] **Separate compilation** — split a `vector3` struct (3 doubles, length, dot, cross) into `vec3.h` and `vec3.cpp`. Build with `g++ -c` for each, then link. Then move `length` into the header as `inline` and confirm it still builds.
-- [ ] **Include guard drill** — remove `#pragma once` from a header, include it twice in one `.cpp` (directly and via a second header), and read the "redefinition" error. Then fix it.
-- [ ] **Preprocessor tour** — run `g++ -E file.cpp | head -50` on a small program and read what the preprocessor actually produced. Identify the line where `<iostream>` was substituted in.
-- [ ] **Symbol inspection** — build a small project with separate compilation and run `nm` on each `.o`. Find a `T` symbol in one and its `U` reference in another.
-- [ ] **Linker error drill** — declare a function in a header, forget to define it, and build. Read the error. Then add a definition and confirm it links.
-- [ ] **`using namespace std;` collision drill** — write a program that declares an `int count` variable AND calls `std::count()` from `<algorithm>` in the same scope, with `using namespace std;` active. Observe the ambiguity or shadowing, then fix it by removing the `using namespace std;` line and prefixing the standard library call.
-- [ ] **CMake basics** — convert your multi-file project to a `CMakeLists.txt` that produces an executable. Build it from a clean `build/` directory.
-- [ ] **Optimization comparison** — write a tight loop (e.g. sum 1..1e9). Time it under `-O0`, `-O2`, `-O3`, `-O3 -march=native`. Record the wall time of each.
-- [ ] **Warning tour** — compile with `-Wall -Wextra -Wpedantic -Wshadow` and fix every warning in your existing code.
+- [ ] **Build a Hello program** three ways: single file (one g++ command), compile to an object file then link, and with CMake. Compare the files each one produces.
+- [ ] **Type sizes**: write a program that prints `sizeof(bool)`, `sizeof(char)`, `sizeof(wchar_t)`, `sizeof(int)`, `sizeof(long)`, `sizeof(long long)`, `sizeof(float)`, `sizeof(double)`, `sizeof(long double)`, `sizeof(std::string)`, `sizeof(void*)`. Build it on your machine and write down the values.
+- [ ] **Comment playground**: put a `/*` inside a `/* ... */` block and see the error. Then fix it using `#if 0`.
+- [ ] **Overload `print`**: write four overloads: `print(int)`, `print(double)`, `print(const std::string&)`, `print(bool)`. Test that `print(0)`, `print(0.0)` and `print("hi")` pick the overloads you expect. (Hint: `print("hi")` is a `const char*`, not a `std::string`. Fix it by adding a `const char*` overload, or by calling `print(std::string("hi"))`.)
+- [ ] **Default arguments**: write `make_window(width, height, title = "App", fullscreen = false)` that prints its parameters. Call it with 1, 2, 3 and 4 arguments.
+- [ ] **Pass-by-value vs reference**: write a `swap` for `int` and for `std::string` that takes references. Check that the caller sees the change.
+- [ ] **Reference confusion drill**: write `increment_wrong(int x)` and `increment_right(int& x)` yourself from scratch (don't copy this file). Predict the output on paper, then compile and check.
+- [ ] **Separate compilation**: split a `vector3` struct (3 doubles, length, dot, cross) into `vec3.h` and `vec3.cpp`. Compile each with `g++ -c`, then link. Then move `length` into the header as `inline` and confirm it still builds.
+- [ ] **Include guard drill**: remove `#pragma once` from a header, include it twice in one `.cpp` (once directly, once through a second header), and read the "redefinition" error. Then fix it.
+- [ ] **Preprocessor tour**: run `g++ -E file.cpp | head -50` on a small program and read what the preprocessor produced. Find the spot where `<iostream>` got pasted in.
+- [ ] **Symbol inspection**: build a small multi-file project and run `nm` on each `.o`. Find a `T` symbol in one file and the matching `U` reference in another.
+- [ ] **Linker error drill**: declare a function in a header, forget to define it, and build. Read the error. Then add the definition and confirm it links.
+- [ ] **`using namespace std;` clash drill**: write a program that declares a global `int count` and also calls `std::count()` from `<algorithm>`, with `using namespace std;` on. Look at the ambiguity error, then fix it by removing `using namespace std;` and writing `std::` on the library calls.
+- [ ] **CMake basics**: turn your multi-file project into a `CMakeLists.txt` that builds an executable. Build it from an empty `build/` folder.
+- [ ] **Optimization comparison**: write a tight loop (for example, sum 1 to 1e9). Time it with `-O0`, `-O2`, `-O3` and `-O3 -march=native`. Write down the time for each.
+- [ ] **Warning tour**: compile with `-Wall -Wextra -Wpedantic -Wshadow` and fix every warning in your existing code.
